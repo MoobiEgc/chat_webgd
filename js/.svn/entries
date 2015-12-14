@@ -1,0 +1,49 @@
+10
+
+dir
+0
+http://209.208.109.13/svn/moodle/trunk/moodle_webgd/blocks/chat_webgd/js
+http://209.208.109.13/svn/moodle
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+d40b72db-cd20-486d-9c69-fddb3cbdf42c
+
+chat.js
+file
+
+
+
+add
+
+functions.js
+file
+
+
+
+add
+
+jquery.js
+file
+
+
+
+add
+

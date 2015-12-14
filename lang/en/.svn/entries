@@ -1,0 +1,35 @@
+10
+
+dir
+0
+https://subversion.assembla.com/svn/moodle-webgd/trunk/blocks/online_users/lang/en
+https://subversion.assembla.com/svn/moodle-webgd
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a8d1e622-fc44-4eda-b85e-536c323ea50f
+
+block_chat_webgd.php
+file
+
+
+
+add
+
