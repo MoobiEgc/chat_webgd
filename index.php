@@ -4,7 +4,7 @@ require_once($CFG->libdir . '/adminlib.php');
 require_once($CFG->dirroot.'/blocks/chat_webgd/form/ChatForm.php');
 require_once($CFG->dirroot.'/blocks/chat_webgd/class/ChatWebgdDao.php');
 global $CFG,$DB,$USER;
-
+require_login(1);
 echo '<style>
 		.user-select-group{
 			width:200px;

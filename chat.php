@@ -3,7 +3,7 @@
 require_once('../../config.php');
 require_once($CFG->dirroot . '/blocks/chat_webgd/class/ChatWebgdDao.php');
 global $USER, $CFG, $DB, $OUTPUT;
-
+require_login(1);
 $acao = $_POST['acao'];
 
 switch ($acao) {

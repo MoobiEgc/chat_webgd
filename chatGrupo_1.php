@@ -4,7 +4,7 @@ require_once($CFG->libdir . '/adminlib.php');
 require_once($CFG->dirroot.'/blocks/chat_webgd/class/ChatWebgdDao.php');
 require_once($CFG->dirroot.'/blocks/chat_webgd/form/ChatGrupoForm.php');
 global $USER,$CFG;
-
+require_login(1);
 echo $OUTPUT->header('themeselector');
 
 echo '<style>
