@@ -162,7 +162,7 @@ class ChatWebgdDao {
     }
 
     public function verificaUsuarioInativo($idGrupo, $idUsuario) {
-        $sql = "SELECT cgu.id FROM mdl_chatwebgd_grupo_usuario cgu
+        $sql = "SELECT cgu.id FROM {$this->CFG->prefix}chatwebgd_grupo_usuario cgu
 				WHERE cgu.user_id = :iduser AND cgu.chatwebgd_grupo_id = :idgrupo";
 
         $params = array('iduser' => $idUsuario, 'idgrupo' => $idGrupo);

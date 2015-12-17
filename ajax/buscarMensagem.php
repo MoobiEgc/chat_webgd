@@ -3,7 +3,7 @@
 require_once('../../config.php');
 global $USER, $CFG;
 require_once($CFG->dirroot.'/blocks/chat_webgd/class/ChatWebgdDao.php');
-
+require_login(1);
 $idGrupo = required_param('id',PARAM_TEXT);
 $carregarMsg = optional_param('carregarMsg',false,PARAM_BOOL);
 

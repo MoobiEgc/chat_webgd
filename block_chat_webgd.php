@@ -50,12 +50,13 @@ class block_chat_webgd extends block_base {
             $userfields = user_picture::fields('u', array('username'));
             $params['now'] = $now;
             $params['timefrom'] = $timefrom;
+            $params['id']=$USER->id;
             $sql = "SELECT $userfields
 						  FROM {user} u
 						 WHERE u.lastaccess > :timefrom
 							   AND u.lastaccess <= :now
 							   AND u.deleted = 0
-							   AND u.id <> " . $USER->id;
+							   AND u.id <> :id";
 
             if ($users = $DB->get_records_sql($sql, $params, 0, 50)) {
                 foreach ($users as $user) {

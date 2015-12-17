@@ -42,29 +42,29 @@ switch ($acao) {
         $retorno = array('nao_lidos' => array(), 'mensagens' => array(), 'novas_janelas' => array());
 
         $where = '';
-
+        $params=array('user_id'=>$USER->id);
         if ($ids == '') {
-            $where = ' WHERE m.para_id = ' . $USER->id . ' AND m.lido=0 GROUP BY m.user_id ';
+            $where = ' WHERE m.para_id = :user_id AND m.lido=0 GROUP BY m.user_id ';
         } else {
-            $where = ' WHERE m.user_id in (' . implode(',', $ids) . ') AND m.para_id=' . $USER->id . ' GROUP BY m.user_id limit 5';
+            $where = ' WHERE m.user_id in (' . implode(',', $ids) . ') AND m.para_id= :user_id GROUP BY m.user_id limit 5';
         }
 
         $retorno['mensagens'] == '';
-
-        $verificar = $DB->get_records_sql('SELECT m.user_id,u.firstname FROM mdl_chatwebgd_mensagem m
-									INNER JOIN mdl_user u ON m.user_id = u.id ' . $where);
+        $sql="SELECT m.user_id,u.firstname FROM {$this->CFG->prefix}chatwebgd_mensagem m
+									INNER JOIN {$this->CFG->prefix}user u ON m.user_id = u.id ". $where;
+        $verificar = $DB->get_records_sql($sql,$params);
 
         if ($verificar) {
 
             foreach ($verificar as $value) {
                 $retorno['nao_lidos'][] = $value->user_id;
+                $params=array('para_id'=> $USER->id,'user_id'=>$value->user_id);
 
+                $sql = "SELECT m.*,u.firstname FROM {$this->CFG->prefix}chatwebgd_mensagem m
+							INNER JOIN {$this->CFG->prefix}user u ON u.id = m.user_id
+							WHERE m.para_id = :para_id  AND m.user_id= :user_id OR m.para_id = :user_id  AND m.user_id= :para_id" ;
 
-                $sql = 'SELECT m.*,u.firstname FROM mdl_chatwebgd_mensagem m
-							INNER JOIN mdl_user u ON u.id = m.user_id
-							WHERE m.para_id = ' . $USER->id . '  AND m.user_id=' . $value->user_id . ' OR m.para_id = ' . $value->user_id . '  AND m.user_id=' . $USER->id;
-
-                $selecionar = $DB->get_records_sql($sql);
+                $selecionar = $DB->get_records_sql($sql,$params);
 
                 $mensagem = '';
                 $nomemsg = '';
@@ -85,7 +85,7 @@ switch ($acao) {
         $user = $_POST['user'];
 
         $param = array(1, $user, $USER->id);
-        $DB->execute("UPDATE `mdl_chatwebgd_mensagem` SET lido = ? WHERE user_id = ? AND para_id = ?", $param);
+        $DB->execute("UPDATE `{$this->CFG->prefix}chatwebgd_mensagem` SET lido = ? WHERE user_id = ? AND para_id = ?", $param);
 
         break;
 
@@ -100,13 +100,13 @@ switch ($acao) {
         $userfields = user_picture::fields('u', array('username'));
         $params['now'] = $now;
         $params['timefrom'] = $timefrom;
-
+        $params['user_id']=$USER->id;
         $sql = "SELECT $userfields
                 FROM {user} u
                  WHERE u.lastaccess > :timefrom
                      AND u.lastaccess <= :now
                      AND u.deleted = 0
-                     AND u.id <> " . $USER->id;
+                     AND u.id <> :user_id";
 
         if ($users = $DB->get_records_sql($sql, $params, 0, 50)) {
             foreach ($users as $user) {
@@ -161,12 +161,12 @@ switch ($acao) {
           $id = $_POST['id'];
 
           $mensagem = '';
-
-          $sql = 'SELECT m.*, u.firstname FROM mdl_chatwebgd_mensagem m
-  									INNER JOIN mdl_user u ON m.user_id = u.id where (m.user_id = '.$USER->id.' and m.para_id = '.$id.') or (m.user_id = '.$id.' and m.para_id = '.$USER->id.')
+          $params=array('user_id'=>$USER->id,'para_id'=>$id);
+          $sql = 'SELECT m.*, u.firstname FROM {$this->CFG->prefix}chatwebgd_mensagem m
+  									INNER JOIN {$this->CFG->prefix}user u ON m.user_id = u.id where (m.user_id = :user_id and m.para_id = :para_id) or (m.user_id = :para_id and m.para_id = :user_id)
                     order by m.data asc limit 20';
 
-          $verificar = $DB->get_records_sql($sql);
+          $verificar = $DB->get_records_sql($sql,$params);
 
           if ($verificar) {
 
