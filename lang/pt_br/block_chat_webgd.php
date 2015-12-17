@@ -22,10 +22,10 @@
  * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+$string['sairGrupo'] = 'Sair do grupo';
 $string['cadastrarGrupo'] = 'Cadastrar Grupo';
 $string['CriarGrupo'] = 'Criar Grupo';
 $string['voceSaiuGrupo'] = 'Tudo certo, você saiu do grupo';
 $string['ErroAoEfetuarAcao'] = 'Ooops, houve um erro ao efetuar essa ação';
 $string['ErroGrupoNaoEncontrado'] = 'Ooops, não conseguimos encontrar esse grupo';
-
+?>
