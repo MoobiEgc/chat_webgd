@@ -28,7 +28,7 @@ switch ($acao) {
 
     case 'verificar':
         $Allids = optional_param_array('ids', '', PARAM_INT);
-        
+
         $ids = '';
         if ($Allids != '') {
             foreach ($Allids as $key) {
@@ -42,7 +42,7 @@ switch ($acao) {
         $retorno = array('nao_lidos' => array(), 'mensagens' => array(), 'novas_janelas' => array());
 
         $where = '';
-        $params=array('user_id'=>$USER->id);
+        $params = array('user_id' => $USER->id);
         if ($ids == '') {
             $where = ' WHERE m.para_id = :user_id AND m.lido=0 GROUP BY m.user_id ';
         } else {
@@ -50,26 +50,26 @@ switch ($acao) {
         }
 
         $retorno['mensagens'] == '';
-        $sql="SELECT m.user_id,u.firstname 
+        $sql = "SELECT m.user_id,u.firstname 
                 FROM {chatwebgd_mensagem} m
-                JOIN {user} u ON m.user_id = u.id ". $where;
-        $verificar = $DB->get_records_sql($sql,$params,0,5);
+                JOIN {user} u ON m.user_id = u.id " . $where;
+        $verificar = $DB->get_records_sql($sql, $params, 0, 5);
 
         if ($verificar) {
 
             foreach ($verificar as $value) {
                 $retorno['nao_lidos'][] = $value->user_id;
                 //$params=array('para_id'=> $USER->id,'user_id'=>$value->user_id);
-                $params=array($USER->id,$value->user_id,$value->user_id,$USER->id);
+                $params = array($USER->id, $value->user_id, $value->user_id, $USER->id);
                 $sql = "SELECT m.*,u.firstname 
                           FROM {chatwebgd_mensagem} m
-			  JOIN {user} u ON u.id = m.user_id
-			 WHERE m.para_id = ?  
+              JOIN {user} u ON u.id = m.user_id
+             WHERE m.para_id = ?  
                                AND m.user_id= ? 
                                OR m.para_id = ?  
-                               AND m.user_id= ?" ;
+                               AND m.user_id= ?";
 
-                $selecionar = $DB->get_records_sql($sql,$params);
+                $selecionar = $DB->get_records_sql($sql, $params);
 
                 $mensagem = '';
                 $nomemsg = '';
@@ -87,8 +87,8 @@ switch ($acao) {
         break;
 
     case 'mudar_status':
-        
-        $user=  optional_param('user', 0, PARAM_INT);
+
+        $user = optional_param('user', 0, PARAM_INT);
         $param = array(1, $user, $USER->id);
         $DB->execute("UPDATE {chatwebgd_mensagem} SET lido = ? WHERE user_id = ? AND para_id = ?", $param);
 
@@ -105,7 +105,7 @@ switch ($acao) {
         $userfields = user_picture::fields('u', array('username'));
         $params['now'] = $now;
         $params['timefrom'] = $timefrom;
-        $params['user_id']=$USER->id;
+        $params['user_id'] = $USER->id;
         $sql = "SELECT $userfields
                   FROM {user} u
                  WHERE u.lastaccess > :timefrom
@@ -161,33 +161,31 @@ switch ($acao) {
 
         break;
 
-      case 'historico':
-          $id=  optional_param('id', 0, PARAM_INT);
-          
+    case 'historico':
+        $id = optional_param('id', 0, PARAM_INT);
 
-          $mensagem = '';
-          //$params=array('user_id'=>$USER->id,'para_id'=>$id);
-          $params=array($USER->id,$id,$id,$USER->id);
-      
-          $sql = "SELECT m.*, u.firstname 
+
+        $mensagem = '';
+        //$params=array('user_id'=>$USER->id,'para_id'=>$id);
+        $params = array($USER->id, $id, $id, $USER->id);
+
+        $sql = "SELECT m.*, u.firstname 
                     FROM {chatwebgd_mensagem} m 
                     JOIN {user} u ON m.user_id = u.id 
                    WHERE (m.user_id = ? AND m.para_id = ?) 
                          OR (m.user_id = ? AND m.para_id = ?) 
                 ORDER BY m.data";
-          
-          $verificar = $DB->get_records_sql($sql,$params,0,20);
 
-          if ($verificar) {
+        $verificar = $DB->get_records_sql($sql, $params, 0, 20);
 
-              foreach ($verificar as $value) {
-                  $mensagem .= '<li><span>' . $value->firstname . ' disse:</span><p>' . $value->mensagem . '</p></li>';
+        if ($verificar) {
 
-              }
+            foreach ($verificar as $value) {
+                $mensagem .= '<li><span>' . $value->firstname . ' disse:</span><p>' . $value->mensagem . '</p></li>';
+            }
+        }
 
-          }
-
-          echo $mensagem;
-          break;
+        echo $mensagem;
+        break;
 }
 ?>
