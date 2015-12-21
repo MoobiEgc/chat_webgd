@@ -4,12 +4,12 @@ require_once('../../config.php');
 require_once($CFG->dirroot . '/blocks/chat_webgd/class/ChatWebgdDao.php');
 global $USER, $CFG, $DB, $OUTPUT;
 require_login(1);
-$acao = $_POST['acao'];
 
+$acao = optional_param('acao', '', PARAM_TEXT);
 switch ($acao) {
     case 'inserir':
-        $para = $_POST['para'];
-        $mensagem = strip_tags($_POST['mensagem']);
+        $para = optional_param('para', 0, PARAM_INT);
+        $mensagem = strip_tags(optional_param('mensagem', '', PARAM_TEXT));
 
         $msgObj = new stdClass;
         $msgObj->mensagem = $mensagem;
@@ -27,8 +27,8 @@ switch ($acao) {
         break;
 
     case 'verificar':
+        $Allids = optional_param_array('ids', '', PARAM_INT);
         
-        $Allids = isset($_POST['ids']) ? $_POST['ids'] : '';
         $ids = '';
         if ($Allids != '') {
             foreach ($Allids as $key) {
@@ -51,8 +51,8 @@ switch ($acao) {
 
         $retorno['mensagens'] == '';
         $sql="SELECT m.user_id,u.firstname 
-               FROM {chatwebgd_mensagem} m
-               JOIN {user} u ON m.user_id = u.id ". $where;
+                FROM {chatwebgd_mensagem} m
+                JOIN {user} u ON m.user_id = u.id ". $where;
         $verificar = $DB->get_records_sql($sql,$params,0,5);
 
         if ($verificar) {
@@ -87,8 +87,8 @@ switch ($acao) {
         break;
 
     case 'mudar_status':
-        $user = $_POST['user'];
-
+        
+        $user=  optional_param('user', 0, PARAM_INT);
         $param = array(1, $user, $USER->id);
         $DB->execute("UPDATE {chatwebgd_mensagem} SET lido = ? WHERE user_id = ? AND para_id = ?", $param);
 
@@ -162,8 +162,8 @@ switch ($acao) {
         break;
 
       case 'historico':
-
-          $id = $_POST['id'];
+          $id=  optional_param('id', 0, PARAM_INT);
+          
 
           $mensagem = '';
           //$params=array('user_id'=>$USER->id,'para_id'=>$id);

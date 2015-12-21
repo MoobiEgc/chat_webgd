@@ -4,15 +4,15 @@ require_once('../../config.php');
 global $USER, $CFG;
 require_once($CFG->dirroot.'/blocks/chat_webgd/class/ChatWebgdDao.php');
 require_login(1);
-$acao = $_POST['acao'];
-	
+
+$acao = optional_param('acao', '', PARAM_TEXT);	
 	switch($acao){
                 case 'inserir':
                         $grupoChatDao = new ChatWebgdDao();
 	
                         $mensagemChat->user_id = $USER->id;
-                        $mensagemChat->chatwebgd_grupo_id = $_POST['para'];
-                        $mensagemChat->mensagem = strip_tags($_POST['mensagem']);
+                        $mensagemChat->chatwebgd_grupo_id = optional_param('para', 0, PARAM_INT);
+                        $mensagemChat->mensagem = strip_tags(optional_param('mensagem', '', PARAM_TEXT));
                         $mensagemChat->data_registro = time();
 
                         if($grupoChatDao->inserirMensagem($mensagemChat)){
@@ -22,8 +22,8 @@ $acao = $_POST['acao'];
                 
                 case 'verificar':
                     $retorno = array('nao_lidos'=>array(),'mensagens'=>array(), 'novas_janelas'=>array());
+                    $Allids = optional_param_array('ids', '', PARAM_INT);
                     
-                    $Allids = isset($_POST['ids'])?$_POST['ids']:'';
                     $ids = array();
                     $nomeGrupo = array();
                     
@@ -68,8 +68,8 @@ $acao = $_POST['acao'];
                     echo $retorno;
             break;
             case 'mudar_status':
-                   
-                    $idGrupo = $_POST['grupo'];
+                    $idGrupo = optional_param('grupo', 0, PARAM_INT);
+                    
 
                     $grupoChatDao = new ChatWebgdDao();
                     $grupoChatDao->marcarMensagensLidas($idGrupo,$USER->id);

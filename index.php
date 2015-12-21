@@ -66,8 +66,9 @@ if(!$id||($id && $grupo)){
 		}
 		
 		if($id){
-			if(count($_POST['usuarios_grupo'])){
-				foreach ( $_POST['usuarios_grupo'] as $usuario) {
+                        $usuarios =optional_param_array('usuarios_grupo', array(), PARAM_TEXT); 
+                        if(count($usuarios)){
+                                foreach($usuarios as $usuario){
 					if($chatDao->verificaUsuarioInativo($id,$usuario)){
 						$chatDao->ativarUsuario($id,$usuario);
 					}else{
