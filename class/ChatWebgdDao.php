@@ -115,7 +115,7 @@ class ChatWebgdDao {
     }
 
     public function buscaMensagens($idGrupo, $idUsuario) {
-        $sql = "  SELECT mg.id,u.id as user_id,mg.mensagem,mg.data_registro, CONCAT(u.firstname,' ',u.lastname) AS nome_usuario
+        $sql = "  SELECT mg.id,u.id as user_id,mg.mensagem,mg.data_registro, ".$DB->sql_concat('u.firstname',' ','u.lastname')." AS nome_usuario
                     FROM {chatwebgd_mensagem_usuario} mu
                     JOIN {chatwebgd_mensagem_grupo} mg ON mu.chatwebgd_mensagem_grupo_id = mg.id
                     JOIN {chatwebgd_grupo_usuario} gu ON gu.id = mu.chatwebgd_grupo_usuario_id
@@ -131,7 +131,7 @@ class ChatWebgdDao {
 
     public function buscaMensagensNaoLidas($idUsuario) {
         $sql = "SELECT mg.chatwebgd_grupo_id,webgrup.nome as nome_grupo,u.id as user_id,
-                         mg.mensagem,mg.data_registro, CONCAT(u.firstname,' ',u.lastname) AS nome_usuario
+                         mg.mensagem,mg.data_registro, ".$DB->sql_concat('u.firstname',' ','u.lastname')." AS nome_usuario
                   FROM {chatwebgd_mensagem_usuario} mu
                   JOIN {chatwebgd_mensagem_grupo} mg ON mu.chatwebgd_mensagem_grupo_id = mg.id
                   JOIN {chatwebgd_grupo_usuario} gu ON gu.id = mu.chatwebgd_grupo_usuario_id
