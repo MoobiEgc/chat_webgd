@@ -13,9 +13,9 @@ class block_chat_webgd extends block_base {
     function init() {
         global $USER, $CFG;
         if ($USER->id) {
-            $videoLibras = $CFG->wwwroot . '/blocks/webgd/videos/chat.mp4';
-            $imgLibras = $CFG->wwwroot . '/theme/clean/pix/icons/mao-libras.png';
-            $this->title = '<img src="' . $CFG->wwwroot . '/blocks/chat_webgd/pix/chat_individual.png" width="40">&nbsp;&nbsp;' . get_string('pluginname', 'block_chat_webgd') . '<a class="hand" id="mainHand" style="margin-right:30px; margin-top:5px; float:right;" href="' . $videoLibras . '"><img src="' . $imgLibras . '" /></a>';
+            $videoLibras = $CFG->wwwroot . '/blocks/chat_webgd/videos/chat.mp4';
+            $imgLibras = $CFG->wwwroot . '/theme/moobi/pix/icons/mao-libras.png';
+            $this->title = '<img src="'.$CFG->wwwroot.'/blocks/chat_webgd/pix/chat_individual.png" width="40">&nbsp;&nbsp;'.get_string('pluginname', 'block_chat_webgd').'<a class="hand" id="mainHand" style="margin-right:30px; margin-top:5px; float:right;" href="' . $videoLibras . '"><img src="'. $imgLibras .'" /></a>';
         }
     }
 
