@@ -1,4 +1,5 @@
 <?php
+
 $string['sairGrupo'] = 'Sair do grupo';
 $string['cadastrarGrupo'] = 'Cadastrar Grupo';
 $string['CriarGrupo'] = 'Criar Grupo';

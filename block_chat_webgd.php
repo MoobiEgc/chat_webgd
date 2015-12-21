@@ -50,13 +50,13 @@ class block_chat_webgd extends block_base {
             $userfields = user_picture::fields('u', array('username'));
             $params['now'] = $now;
             $params['timefrom'] = $timefrom;
-            $params['id']=$USER->id;
+            $params['id'] = $USER->id;
             $sql = "SELECT $userfields
-						  FROM {user} u
-						 WHERE u.lastaccess > :timefrom
-							   AND u.lastaccess <= :now
-							   AND u.deleted = 0
-							   AND u.id <> :id";
+                          FROM {user} u
+                         WHERE u.lastaccess > :timefrom
+                               AND u.lastaccess <= :now
+                               AND u.deleted = 0
+                               AND u.id <> :id";
 
             if ($users = $DB->get_records_sql($sql, $params, 0, 50)) {
                 foreach ($users as $user) {
@@ -88,13 +88,13 @@ class block_chat_webgd extends block_base {
             $listaGrupos = $chatDao->findGroupUser($USER->id);
 
 
-            $this->content->text .= '<hr /><img src="'.$CFG->wwwroot.'/blocks/chat_webgd/pix/chat_grupo.png" width="40">&nbsp;&nbsp;MEUS GRUPOS <a href="' . $CFG->wwwroot . '/blocks/chat_webgd/index.php" class="criar-grupo-chat"> + </a><ul class="list">';
+            $this->content->text .= '<hr /><img src="' . $CFG->wwwroot . '/blocks/chat_webgd/pix/chat_grupo.png" width="40">&nbsp;&nbsp;MEUS GRUPOS <a href="' . $CFG->wwwroot . '/blocks/chat_webgd/index.php" class="criar-grupo-chat"> + </a><ul class="list">';
 
 
             foreach ($listaGrupos as $grupo) {
                 $this->content->text .= '<li class="listentry">';
                 $this->content->text .= '<div class="user">';
-                $this->content->text .= '<a href="javascript:void(0);" class="comecarGrupo" nome="' . $grupo->nome . '" id="'.$grupo->id.'_grupo">';
+                $this->content->text .= '<a href="javascript:void(0);" class="comecarGrupo" nome="' . $grupo->nome . '" id="' . $grupo->id . '_grupo">';
                 $this->content->text .= $grupo->nome . '</a></div>';
                 $this->content->text .= "</li>";
             }
@@ -107,9 +107,9 @@ class block_chat_webgd extends block_base {
 
 
             $this->content->text .= '<script type="text/javascript" src="' . $CFG->wwwroot . '/blocks/chat_webgd/js/jquery.js"></script>
-			 <script type="text/javascript" src="' . $CFG->wwwroot . '/blocks/chat_webgd/js/functions.js"></script>
-			 <script type="text/javascript" src="' . $CFG->wwwroot . '/blocks/chat_webgd/js/chat.js"></script>
-			 <link href="' . $CFG->wwwroot . '/blocks/chat_webgd/styles.css" type="text/css" rel="stylesheet">';
+             <script type="text/javascript" src="' . $CFG->wwwroot . '/blocks/chat_webgd/js/functions.js"></script>
+             <script type="text/javascript" src="' . $CFG->wwwroot . '/blocks/chat_webgd/js/chat.js"></script>
+             <link href="' . $CFG->wwwroot . '/blocks/chat_webgd/styles.css" type="text/css" rel="stylesheet">';
         }
 
         return $this->content;

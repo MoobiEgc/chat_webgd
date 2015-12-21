@@ -6,9 +6,12 @@ require_once($CFG->dirroot . '/blocks/chat_webgd/class/ChatWebgdDao.php');
 
 global $USER, $DB;
 
-$action = $_POST['action'];
-$meetingId = $_POST['meetingId'];
-$meetingName = $_POST['meetingName'];
+//$action = $_POST['action'];
+$action = optional_param('action', '', PARAM_TEXT);
+//$meetingId = $_POST['meetingId'];
+$meetingId = optional_param('meetingId', 0, PARAM_INT);
+//$meetingName = $_POST['meetingName'];
+$meetingName = optional_param('meetingName', '', PARAM_TEXT);
 
 switch ($action) {
     case 'isMeetingRunning':isMeetingRunning($meetingId, $USER);

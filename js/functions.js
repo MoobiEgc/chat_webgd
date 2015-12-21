@@ -8,8 +8,7 @@ var intervalId = 'null';
 function flashTitle(pageTitle, newMessageTitle) {
     if (document.title == pageTitle) {
         document.title = newMessageTitle;
-    }
-    else {
+    } else {
         document.title = pageTitle;
     }
 }
@@ -19,7 +18,7 @@ function toggletoBlinkTitle(status) {
     if (status && intervalId == 'null') {
         intervalId = setInterval("flashTitle(title, 'Nova mensagem!')", 1500);
         //console.log('start ' + intervalId);
-    } else if(!status){
+    } else if (!status) {
         if (intervalId != 'null') {
             //console.log('clear ' + intervalId);
             clearInterval(intervalId);
@@ -46,10 +45,10 @@ $(document).ready(function () {
             var chamar_user = '<a href="' + CFG_BASE + '/blocks/chat_webgd/index.php?id=' + id + '" class="chamar_grupo"></a>';
             var confirm = "'Tem certeza que deseja sair da comunidade?'";
             var sair_grupo = '<a href="' + CFG_BASE + '/blocks/chat_webgd/sairGrupo.php?id=' + id + '" class="sair_grupo" onClick="return confirm(' + confirm + ');">sair</a></li>';
-            html_add = '<div class="janela" id="jan_' + id + '"><div class="topo topoGrupo" id="' + id + '"><span class="grpname">' + nome.substr(0,8)+"..."+ '</span><a href="javascript:void(0);" id="fecharGrupo">X</a>' + imagem + chamar_user + sair_grupo + '</div><div id="corpo"><div class="mensagens"><ul class="listarGrupo"></ul></div><input type="text" class="mensagem" id="' + id + '" maxlength="255" /></div></div>';
+            html_add = '<div class="janela" id="jan_' + id + '"><div class="topo topoGrupo" id="' + id + '"><span class="grpname">' + nome.substr(0, 8) + "..." + '</span><a href="javascript:void(0);" id="fecharGrupo">X</a>' + imagem + chamar_user + sair_grupo + '</div><div id="corpo"><div class="mensagens"><ul class="listarGrupo"></ul></div><input type="text" class="mensagem" id="' + id + '" maxlength="255" /></div></div>';
         } else {
             var imagem = '<a id=' + id + '_mconf target="blank" class="camera-chat"></a>';
-            html_add = '<div class="janela" id="jan_' + id + '"><div class="topo" id="' + id + '"><img style="height:90%; margin 1px" src="'+img+'" /><span class="grpname">' + nome.substr(0,8)+"..." + '</span><a href="javascript:void(0);" id="fechar">X</a>' + imagem + '</div><div id="corpo"><div class="mensagens"><ul class="listar"></ul></div><input type="text" class="mensagem" id="' + id + '" maxlength="255" /></div></div>';
+            html_add = '<div class="janela" id="jan_' + id + '"><div class="topo" id="' + id + '"><img style="height:90%; margin 1px" src="' + img + '" /><span class="grpname">' + nome.substr(0, 8) + "..." + '</span><a href="javascript:void(0);" id="fechar">X</a>' + imagem + '</div><div id="corpo"><div class="mensagens"><ul class="listar"></ul></div><input type="text" class="mensagem" id="' + id + '" maxlength="255" /></div></div>';
         }
 
         if ($('#jan_' + id).length == 0) {
@@ -74,9 +73,9 @@ $(document).ready(function () {
                 i--;
             }
         }
-        
+
         $.post(CFG_CHAT + 'chat.php', {id: id, acao: 'historico'}, function (x) {
-          add_janelas(id, nome, 0, x, img);
+            add_janelas(id, nome, 0, x, img);
         });
         $(this).removeClass('comecar');
         return false;
@@ -127,7 +126,7 @@ $(document).ready(function () {
     function verificar() {
 
         beforeSend: antes = depois;
-        
+
         $.post(CFG_CHAT + 'chat.php', {ids: janelas, acao: 'verificar'}, function (x) {
 
             if (x.nao_lidos != '') {

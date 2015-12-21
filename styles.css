@@ -8,24 +8,24 @@
 .dir-rtl .block_chat_webgd  .content .list li.listentry .message {float:left;}
 *{margin:0; padding:0;}
 div#contatos{
-	padding: 10px;
+    padding: 10px;
 }
 
 div#janelas{
-	position:fixed;
-	bottom:0;
-	right:0;
-        max-width:1185px;
+    position:fixed;
+    bottom:0;
+    right:0;
+    max-width:1185px;
 }
 
 div#janelas div.janela{
-	width:230px;
-	margin-right:5px;
-	float:right;
-	margin-bottom:0;
-	border-left:1px solid #333;
-	border-right:1px solid #333;
-	-moz-border-bottom-colors: none;
+    width:230px;
+    margin-right:5px;
+    float:right;
+    margin-bottom:0;
+    border-left:1px solid #333;
+    border-right:1px solid #333;
+    -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
@@ -35,17 +35,17 @@ div#janelas div.janela{
     border-width: 0 1px;
 }
 div.janela div.topo{
-	float:left;
-	width:229px;
-	/*background:orange;*/
-	height:25px;
-	cursor:pointer;
-	-moz-border-bottom-colors: none;
+    float:left;
+    width:229px;
+    /*background:orange;*/
+    height:25px;
+    cursor:pointer;
+    -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
     background-color: #6d84b4;
-    
+
     border-color: rgba(29, 49, 91, 0.3);
     border-image: none;
     border-style: solid;
@@ -55,105 +55,105 @@ div.janela div.topo{
 
 div.janela div.topoGrupo{
     background-color: #008000;
-    
+
     border-color: rgba(29, 49, 91, 0.3);
 }
 
 div.topo.fixar{position:absolute; bottom:0;}
 div.topo span{font:14px tahoma, arial, helvetica; color:#fff; margin:4px;}
 div.janela div.topo a#fechar, div.janela div.topo a#fecharGrupo{
-	float:left; padding:2px 6px; height:21px; font:15px tahoma, arial;color:#CCCCCC; float:right; 
-	text-decoration:none;
-	font-weight: bold;
+    float:left; padding:2px 6px; height:21px; font:15px tahoma, arial;color:#CCCCCC; float:right; 
+    text-decoration:none;
+    font-weight: bold;
 }
 div.janela div.topo a#fechar:hover, div.janela div.topo a#fecharGrupo:hover{color:#fff;}
 
 div.janela div.topo a.camera-chat{
-	background: url("pix/camera.png") no-repeat;
-	padding:2px 6px;font:15px tahoma, arial;color:#CCCCCC; float:right; 
-	text-decoration:none;
-	font-weight: bold;
-	width: 23px;
-	height: 12px;
-	margin-top: 5px;
+    background: url("pix/camera.png") no-repeat;
+    padding:2px 6px;font:15px tahoma, arial;color:#CCCCCC; float:right; 
+    text-decoration:none;
+    font-weight: bold;
+    width: 23px;
+    height: 12px;
+    margin-top: 5px;
 }
 
 div.janela div.topo a.camera-chat:hover{
-	background: url("pix/camera-branca.png") no-repeat;
+    background: url("pix/camera-branca.png") no-repeat;
 }
 
 div.janela div.topo a.camera-chat:hover{
-	background-image: url("pix/camera-branca.png") no-repeat !important;
+    background-image: url("pix/camera-branca.png") no-repeat !important;
 }
 
 div.janela div.topo a.chamar_grupo{
-	background: url("pix/adicionar_pessoa_tam_ok.png") no-repeat;
-	padding:4px 2px;font:15px tahoma, arial;color:#CCCCCC; float:right; 
-	text-decoration:none;
-	font-weight: bold;
-	width: 23px;
-	height: 12px;
-	margin-top: 5px;
+    background: url("pix/adicionar_pessoa_tam_ok.png") no-repeat;
+    padding:4px 2px;font:15px tahoma, arial;color:#CCCCCC; float:right; 
+    text-decoration:none;
+    font-weight: bold;
+    width: 23px;
+    height: 12px;
+    margin-top: 5px;
 }
 
 div.janela div.topo a.sair_grupo{
-	padding:2px 6px;font:15px tahoma, arial;color:#CCCCCC; float:right; 
-	text-decoration:none;
-	font-weight: bold;
-	width: 27px;
-	height: 12px;
-	margin-top: 0px;
+    padding:2px 6px;font:15px tahoma, arial;color:#CCCCCC; float:right; 
+    text-decoration:none;
+    font-weight: bold;
+    width: 27px;
+    height: 12px;
+    margin-top: 0px;
 }
 
 div.janela div.topo a.chamar_grupo:hover, div.janela div.topo a.sair_grupo:hover{
-	color:#FFFFFF;
+    color:#FFFFFF;
 }
 
 div.janela input[type=text]{
-	padding:3px; border:0;
-	outline:none;
-	background:#f4f4f4;
-	font:13px arial, tahoma;
-	color:#333;
-	width:224px;
+    padding:3px; border:0;
+    outline:none;
+    background:#f4f4f4;
+    font:13px arial, tahoma;
+    color:#333;
+    width:224px;
 }
 div.mensagens{
-	float:left;
-	width:230px;
-	height:200px;
-	border-bottom:1px solid #CCCCCC;
+    float:left;
+    width:230px;
+    height:200px;
+    border-bottom:1px solid #CCCCCC;
 }
 div.mensagens ul.listar, div.mensagens ul.listarGrupo{
-	list-style-type:none;
-	float:left;
-	width:230px;
-	background:#fff;
-	height:200px;
-	overflow-y:auto;
-	overflow-x:hidden;
-	margin-left: 0px;
-	margin-top: 0px;
+    list-style-type:none;
+    float:left;
+    width:230px;
+    background:#fff;
+    height:200px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    margin-left: 0px;
+    margin-top: 0px;
 }
 div.mensagens ul.listar li, div.mensagens ul.listarGrupo li{
-	float:left;
-	width:100%;
-	border-bottom:1px dotted #333;
-	padding-bottom:3px;
+    float:left;
+    width:100%;
+    border-bottom:1px dotted #333;
+    padding-bottom:3px;
 }
 div.mensagens ul.listar li span, div.mensagens ul.listarGrupo li span{
-	font:13px tahoma, arial, helvetica;
-	color:#333;
-	float:left;
-	width:100%;
-	margin:3px;
+    font:13px tahoma, arial, helvetica;
+    color:#333;
+    float:left;
+    width:100%;
+    margin:3px;
 }
 div.mensagens ul.listar li p, div.mensagens ul.listarGrupo li p{
-	font:13px tahoma, arial, helvetica;
-	color:#333;
-	float:left;
-	width:100%;
-	margin-left:3px;
+    font:13px tahoma, arial, helvetica;
+    color:#333;
+    float:left;
+    width:100%;
+    margin-left:3px;
 }
 .criar-grupo-chat{
-	font-size:20px;
+    font-size:20px;
 }

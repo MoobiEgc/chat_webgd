@@ -9,7 +9,7 @@
  * Replaces occurrences of emoticons with the corresponding image
  * images are of class emoticonimg so they can be styled
  */
-jQuery.fn.emoticons = function(icon_folder) {
+jQuery.fn.emoticons = function (icon_folder) {
     /* emoticons is the folder where the emoticons are stored*/
     var icon_folder = icon_folder || "js/emoticons/emoticons";
     //var settings = jQuery.extend({emoticons: "emoticons"}, options);
@@ -22,32 +22,32 @@ jQuery.fn.emoticons = function(icon_folder) {
      * we add "cow" : Array("(C)") to emotes
      * and an image called 'face-cow.png' under the emoticons folder   
      */
-    var emotes = {"smile": Array(":-)",":)","=]","=)"),
-                  "sad": Array(":-(","=(",":[",":&lt;",":("),
-                  "wink": Array(";-)",";)",";]","*)"),
-                  "grin": Array(":D","=D","XD","BD","8D","xD",":d"),
-                  "surprise": Array(":O","=O",":-O","=-O"),
-                  "devilish": Array("(6)"),
-                  "angel": Array("(A)"),
-                  "crying": Array(":'(",":'-("),
-                  "plain": Array(":|"),
-                  "smile-big": Array(":o)"),
-                  "glasses": Array("8)","8-)"),
-                  "kiss": Array("(K)",":-*", ":*"),
-                  "monkey": Array("(M)")};
-                  
+    var emotes = {"smile": Array(":-)", ":)", "=]", "=)"),
+        "sad": Array(":-(", "=(", ":[", ":&lt;", ":("),
+        "wink": Array(";-)", ";)", ";]", "*)"),
+        "grin": Array(":D", "=D", "XD", "BD", "8D", "xD", ":d"),
+        "surprise": Array(":O", "=O", ":-O", "=-O"),
+        "devilish": Array("(6)"),
+        "angel": Array("(A)"),
+        "crying": Array(":'(", ":'-("),
+        "plain": Array(":|"),
+        "smile-big": Array(":o)"),
+        "glasses": Array("8)", "8-)"),
+        "kiss": Array("(K)", ":-*", ":*"),
+        "monkey": Array("(M)")};
+
     /* Replaces all ocurrences of emoticons in the given html with images
      */
-    function emoticons(html){
-        for(var emoticon in emotes){
-            for(var i = 0; i < emotes[emoticon].length; i++){
+    function emoticons(html) {
+        for (var emoticon in emotes) {
+            for (var i = 0; i < emotes[emoticon].length; i++) {
                 /* css class of images is emoticonimg for styling them*/
-                html = html.replace(emotes[emoticon][i],"<img src=\""+icon_folder+"/face-"+emoticon+".png\" class=\"emoticonimg\" alt=\""+emotes[emoticon][i]+"\"/>","g");
+                html = html.replace(emotes[emoticon][i], "<img src=\"" + icon_folder + "/face-" + emoticon + ".png\" class=\"emoticonimg\" alt=\"" + emotes[emoticon][i] + "\"/>", "g");
             }
         }
         return html;
     }
-    return this.each(function(){
+    return this.each(function () {
         $(this).html(emoticons($(this).html()));
     });
 };

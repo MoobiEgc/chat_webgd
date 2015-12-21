@@ -1,9 +1,10 @@
 <?php
+
 require_once(dirname(__FILE__) . '../../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
-require_once($CFG->dirroot.'/blocks/chat_webgd/class/ChatWebgdDao.php');
-require_once($CFG->dirroot.'/blocks/chat_webgd/form/ChatGrupoForm.php');
-global $USER,$CFG;
+require_once($CFG->dirroot . '/blocks/chat_webgd/class/ChatWebgdDao.php');
+require_once($CFG->dirroot . '/blocks/chat_webgd/form/ChatGrupoForm.php');
+global $USER, $CFG;
 require_login(1);
 echo $OUTPUT->header('themeselector');
 
@@ -39,7 +40,7 @@ echo '<style>
     font-weight: 600;
     padding-left: 0;
 }
-		.personSay {
+        .personSay {
     color: #000;
     font-weight: 600;
     padding-left: 0;
@@ -51,7 +52,7 @@ echo '<style>
     margin-bottom: -12px;
     margin-left: -8px;
 }
-		.bubble2:before {
+        .bubble2:before {
     background-color: #dfeecf;
     box-shadow: -2px 2px 2px 0 rgba(178, 178, 178, 0.4);
     content: " ";
@@ -79,46 +80,45 @@ echo '<style>
 }
 
 .opcoes-grupo {
-	list-style-type: none;
-	font-weight:bold;
+    list-style-type: none;
+    font-weight:bold;
 }
 .opcoes-grupo li {
-	float: left;
-	margin-right:10px;
+    float: left;
+    margin-right:10px;
 }
 .opcoes-grupo li img{
-	margin-right:5px;
+    margin-right:5px;
 }
 
 </style>';
-	  
 
 
-$id = optional_param('id',0,PARAM_INT);
+
+$id = optional_param('id', 0, PARAM_INT);
 $chatDao = new ChatWebgdDao();
 
-$grupo = $chatDao->findGroupUser($USER->id,$id);
+$grupo = $chatDao->findGroupUser($USER->id, $id);
 
-if($grupo){
-	echo $OUTPUT->heading(get_string('Grupo','block_chat_webgd').': '.$grupo->nome);
-	
-	echo '<ul class="opcoes-grupo">
-			<li><a href="'.$CFG->wwwroot.'/blocks/chat_webgd/index.php?id='.$id.'"><img src="'.$CFG->wwwroot.'/theme/image.php/essential/core/1406937317/t/assignroles">'.get_string('chamarUsuario','block_chat_webgd').'</a></li>
-			<li><a href="'.$CFG->wwwroot.'/blocks/chat_webgd/sairGrupo.php?id='.$id.'"><img src="'.$CFG->wwwroot.'/theme/image.php/essential/core/1406937317/t/delete">'.get_string('sairGrupo','block_chat_webgd').'</a></li>
-		  </ul>';
-	
-	echo '<div class="todo-chat" id="mensagens-chat">';
-	echo '</div>';
-	$form = new ChatGrupoForm();
-	$form->set_data(array('idGrupo'=>$id));
-	$form->display();
-	echo '<script src="'.$CFG->wwwroot.'/blocks/chat_webgd/js/emoticons/jquery.corners.js" type="text/javascript"></script>';
-        echo '<script src="'.$CFG->wwwroot.'/blocks/chat_webgd/js/emoticons/jquery.emoticons.js" type="text/javascript"></script>';
-        echo '<script src="'.$CFG->wwwroot.'/blocks/chat_webgd/js/chat_grupo.js" type="text/javascript"/>';
-        
-}else{
-	redirect($CFG->wwwroot,get_string('GrupoNaoEncontrado','block_chat_webgd'));
+if ($grupo) {
+    echo $OUTPUT->heading(get_string('Grupo', 'block_chat_webgd') . ': ' . $grupo->nome);
+
+    echo '<ul class="opcoes-grupo">
+            <li><a href="' . $CFG->wwwroot . '/blocks/chat_webgd/index.php?id=' . $id . '"><img src="' . $CFG->wwwroot . '/theme/image.php/essential/core/1406937317/t/assignroles">' . get_string('chamarUsuario', 'block_chat_webgd') . '</a></li>
+            <li><a href="' . $CFG->wwwroot . '/blocks/chat_webgd/sairGrupo.php?id=' . $id . '"><img src="' . $CFG->wwwroot . '/theme/image.php/essential/core/1406937317/t/delete">' . get_string('sairGrupo', 'block_chat_webgd') . '</a></li>
+          </ul>';
+
+    echo '<div class="todo-chat" id="mensagens-chat">';
+    echo '</div>';
+    $form = new ChatGrupoForm();
+    $form->set_data(array('idGrupo' => $id));
+    $form->display();
+    echo '<script src="' . $CFG->wwwroot . '/blocks/chat_webgd/js/emoticons/jquery.corners.js" type="text/javascript"></script>';
+    echo '<script src="' . $CFG->wwwroot . '/blocks/chat_webgd/js/emoticons/jquery.emoticons.js" type="text/javascript"></script>';
+    echo '<script src="' . $CFG->wwwroot . '/blocks/chat_webgd/js/chat_grupo.js" type="text/javascript"/>';
+} else {
+    redirect($CFG->wwwroot, get_string('GrupoNaoEncontrado', 'block_chat_webgd'));
 }
- 
+
 echo $OUTPUT->footer();
 ?>

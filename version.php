@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -22,9 +23,8 @@
  * @copyright  2016 onwards WebGD group from UFSC http://www.webgd.ufsc.br/
  * @license    http://www.gnu.org/licenses/lgpl-3.0.html GNU LGPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2016010100;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2013110500;        // Requires this Moodle version
+$plugin->version = 2016010100;        // The current plugin version (Date: YYYYMMDDXX)
+$plugin->requires = 2013110500;        // Requires this Moodle version
 $plugin->component = 'block_chat_webgd'; // Full name of the plugin (used for diagnostics)
