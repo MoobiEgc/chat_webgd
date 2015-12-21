@@ -27,7 +27,7 @@ switch ($acao) {
         break;
 
     case 'verificar':
-
+        
         $Allids = isset($_POST['ids']) ? $_POST['ids'] : '';
         $ids = '';
         if ($Allids != '') {
@@ -46,23 +46,28 @@ switch ($acao) {
         if ($ids == '') {
             $where = ' WHERE m.para_id = :user_id AND m.lido=0 GROUP BY m.user_id ';
         } else {
-            $where = ' WHERE m.user_id in (' . implode(',', $ids) . ') AND m.para_id= :user_id GROUP BY m.user_id limit 5';
+            $where = ' WHERE m.user_id in (' . implode(',', $ids) . ') AND m.para_id= :user_id GROUP BY m.user_id';
         }
 
         $retorno['mensagens'] == '';
-        $sql="SELECT m.user_id,u.firstname FROM {$this->CFG->prefix}chatwebgd_mensagem m
-									INNER JOIN {$this->CFG->prefix}user u ON m.user_id = u.id ". $where;
-        $verificar = $DB->get_records_sql($sql,$params);
+        $sql="SELECT m.user_id,u.firstname 
+               FROM {chatwebgd_mensagem} m
+               JOIN {user} u ON m.user_id = u.id ". $where;
+        $verificar = $DB->get_records_sql($sql,$params,0,5);
 
         if ($verificar) {
 
             foreach ($verificar as $value) {
                 $retorno['nao_lidos'][] = $value->user_id;
-                $params=array('para_id'=> $USER->id,'user_id'=>$value->user_id);
-
-                $sql = "SELECT m.*,u.firstname FROM {$this->CFG->prefix}chatwebgd_mensagem m
-							INNER JOIN {$this->CFG->prefix}user u ON u.id = m.user_id
-							WHERE m.para_id = :para_id  AND m.user_id= :user_id OR m.para_id = :user_id  AND m.user_id= :para_id" ;
+                //$params=array('para_id'=> $USER->id,'user_id'=>$value->user_id);
+                $params=array($USER->id,$value->user_id,$value->user_id,$USER->id);
+                $sql = "SELECT m.*,u.firstname 
+                          FROM {chatwebgd_mensagem} m
+			  JOIN {user} u ON u.id = m.user_id
+			 WHERE m.para_id = ?  
+                               AND m.user_id= ? 
+                               OR m.para_id = ?  
+                               AND m.user_id= ?" ;
 
                 $selecionar = $DB->get_records_sql($sql,$params);
 
@@ -85,7 +90,7 @@ switch ($acao) {
         $user = $_POST['user'];
 
         $param = array(1, $user, $USER->id);
-        $DB->execute("UPDATE `{$this->CFG->prefix}chatwebgd_mensagem` SET lido = ? WHERE user_id = ? AND para_id = ?", $param);
+        $DB->execute("UPDATE {chatwebgd_mensagem} SET lido = ? WHERE user_id = ? AND para_id = ?", $param);
 
         break;
 
@@ -102,11 +107,11 @@ switch ($acao) {
         $params['timefrom'] = $timefrom;
         $params['user_id']=$USER->id;
         $sql = "SELECT $userfields
-                FROM {user} u
+                  FROM {user} u
                  WHERE u.lastaccess > :timefrom
-                     AND u.lastaccess <= :now
-                     AND u.deleted = 0
-                     AND u.id <> :user_id";
+                       AND u.lastaccess <= :now
+                       AND u.deleted = 0
+                       AND u.id <> :user_id";
 
         if ($users = $DB->get_records_sql($sql, $params, 0, 50)) {
             foreach ($users as $user) {
@@ -161,12 +166,17 @@ switch ($acao) {
           $id = $_POST['id'];
 
           $mensagem = '';
-          $params=array('user_id'=>$USER->id,'para_id'=>$id);
-          $sql = 'SELECT m.*, u.firstname FROM {$this->CFG->prefix}chatwebgd_mensagem m
-  									INNER JOIN {$this->CFG->prefix}user u ON m.user_id = u.id where (m.user_id = :user_id and m.para_id = :para_id) or (m.user_id = :para_id and m.para_id = :user_id)
-                    order by m.data asc limit 20';
-
-          $verificar = $DB->get_records_sql($sql,$params);
+          //$params=array('user_id'=>$USER->id,'para_id'=>$id);
+          $params=array($USER->id,$id,$id,$USER->id);
+      
+          $sql = "SELECT m.*, u.firstname 
+                    FROM {chatwebgd_mensagem} m 
+                    JOIN {user} u ON m.user_id = u.id 
+                   WHERE (m.user_id = ? AND m.para_id = ?) 
+                         OR (m.user_id = ? AND m.para_id = ?) 
+                ORDER BY m.data";
+          
+          $verificar = $DB->get_records_sql($sql,$params,0,20);
 
           if ($verificar) {
 

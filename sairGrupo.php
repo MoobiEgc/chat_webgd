@@ -6,9 +6,8 @@ require_once($CFG->dirroot.'/blocks/chat_webgd/class/ChatWebgdDao.php');
 global $CFG,$DB,$USER;
 require_login(1);
 echo $OUTPUT->header('themeselector');
-$heading=get_string('sairGrupo','block_chat_webgd');
 
-echo $OUTPUT->heading($heading);
+echo $OUTPUT->heading(get_string('sairGrupo','block_chat_webgd'));
 
 $chatDao = new ChatWebgdDao();
 

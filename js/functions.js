@@ -74,6 +74,7 @@ $(document).ready(function () {
                 i--;
             }
         }
+        
         $.post(CFG_CHAT + 'chat.php', {id: id, acao: 'historico'}, function (x) {
           add_janelas(id, nome, 0, x, img);
         });
@@ -126,7 +127,7 @@ $(document).ready(function () {
     function verificar() {
 
         beforeSend: antes = depois;
-
+        
         $.post(CFG_CHAT + 'chat.php', {ids: janelas, acao: 'verificar'}, function (x) {
 
             if (x.nao_lidos != '') {
