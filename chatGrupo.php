@@ -16,7 +16,7 @@ switch ($acao) {
         $mensagemChat->data_registro = time();
 
         if ($grupoChatDao->inserirMensagem($mensagemChat)) {
-            echo '<li><span>' . $USER->firstname . ' disse:</span><p>' . $mensagemChat->mensagem . '</p></li>';
+            echo '<li><span>' . $USER->firstname . ' '.get_string('disse','block_chat_webgd').':</span><p>' . $mensagemChat->mensagem . '</p></li>';
         }
         break;
 
@@ -56,7 +56,7 @@ switch ($acao) {
                 $mensagem = '';
                 $msg_aux = array_reverse($mensagens, TRUE);
                 foreach ($msg_aux as $msg) {
-                    $mensagem .= '<li><span>' . $msg->nome_usuario . ' disse:</span><p>' . html_entity_decode(nl2br(stripslashes($msg->mensagem))) . '</p></li>';
+                    $mensagem .= '<li><span>' . $msg->nome_usuario . ' '.get_string('disse','block_chat_webgd').':</span><p>' . html_entity_decode(nl2br(stripslashes($msg->mensagem))) . '</p></li>';
                 }
                 if ($nomeGrupo[$idGrupo]) {
                     $retorno['novas_janelas'][$idGrupo . "_grupo"] = $nomeGrupo[$idGrupo];

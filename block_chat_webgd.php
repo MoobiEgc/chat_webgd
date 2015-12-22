@@ -88,7 +88,7 @@ class block_chat_webgd extends block_base {
             $listaGrupos = $chatDao->findGroupUser($USER->id);
 
 
-            $this->content->text .= '<hr /><img src="' . $CFG->wwwroot . '/blocks/chat_webgd/pix/chat_grupo.png" width="40">&nbsp;&nbsp;MEUS GRUPOS <a href="' . $CFG->wwwroot . '/blocks/chat_webgd/index.php" class="criar-grupo-chat"> + </a><ul class="list">';
+            $this->content->text .= '<hr /><img src="' . $CFG->wwwroot . '/blocks/chat_webgd/pix/chat_grupo.png" width="40">&nbsp;&nbsp;'.get_string('meusGrupos','block_chat_webgd').' <a href="' . $CFG->wwwroot . '/blocks/chat_webgd/index.php" class="criar-grupo-chat"> + </a><ul class="list">';
 
 
             foreach ($listaGrupos as $grupo) {

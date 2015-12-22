@@ -23,7 +23,7 @@ class ChatForm extends moodleform {
             $attrNome['disabled'] = 'disabled';
         }
 
-        $mform->addElement('text', 'nome', get_string('labelNome', 'block_webgd_community'), $attrNome);
+        $mform->addElement('text', 'nome', get_string('labelNome', 'block_chat_webgd'), $attrNome);
         if (!is_null($idGrupo)) {
             $mform->addElement('hidden', 'id', $idGrupo);
         }
@@ -33,7 +33,7 @@ class ChatForm extends moodleform {
         }
 
         if ($validarNome) {
-            $mform->addRule('nome', get_string('labelValidacaoNome', 'block_webgd_community'), 'required', null, 'client');
+            $mform->addRule('nome', get_string('labelValidacaoNome', 'block_chat_webgd'), 'required', null, 'client');
         }
 
         $chatDao = new ChatWebgdDao();
@@ -50,7 +50,7 @@ class ChatForm extends moodleform {
 
         $buttonarray = array();
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
-        $buttonarray[] = &$mform->createElement('button', 'cancelar', get_string('cancelar', 'block_webgd_community'), 'onclick=location.href="' . $CFG->wwwroot . '/blocks/webgd_community/index.php"');
+        $buttonarray[] = &$mform->createElement('button', 'cancelar', get_string('cancelar', 'block_chat_webgd'), 'onclick=location.href="' . $CFG->wwwroot . '/blocks/webgd_community/index.php"');
         $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
         $mform->closeHeaderBefore('buttonar');
     }

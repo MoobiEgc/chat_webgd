@@ -21,7 +21,7 @@ switch ($acao) {
         $salvo = $DB->insert_record('chatwebgd_mensagem', $msgObj);
 
         if ($salvo) {
-            echo '<li><span>' . $USER->firstname . ' disse:</span><p>' . $mensagem . '</p></li>';
+            echo '<li><span>' . $USER->firstname . ' '.get_string('disse','block_chat_webgd').':</span><p>' . $mensagem . '</p></li>';
         }
 
         break;
@@ -74,7 +74,7 @@ switch ($acao) {
                 $mensagem = '';
                 $nomemsg = '';
                 foreach ($selecionar as $msg) {
-                    $mensagem .= '<li><span>' . $msg->firstname . ' disse:</span><p>' . $msg->mensagem . '</p></li>';
+                    $mensagem .= '<li><span>' . $msg->firstname . ' '.get_string('disse','block_chat_webgd').':</span><p>' . $msg->mensagem . '</p></li>';
                     $nomemsg = $msg->firstname;
                 }
                 $retorno['novas_janelas'][$value->user_id] = $msg->firstname;
@@ -144,7 +144,7 @@ switch ($acao) {
         $listaGrupos = $chatDao->findGroupUser($USER->id);
 
 
-        $retorno .= '<hr /><img src="' . $CFG->wwwroot . '/blocks/chat_webgd/pix/chat_grupo.png" width="40">&nbsp;&nbsp;MEUS GRUPOS <a href="' . $CFG->wwwroot . '/blocks/chat_webgd/index.php" class="criar-grupo-chat"> + </a><ul class="list">';
+        $retorno .= '<hr /><img src="' . $CFG->wwwroot . '/blocks/chat_webgd/pix/chat_grupo.png" width="40">&nbsp;&nbsp;'.get_string('meusGrupos','block_chat_webgd').' <a href="' . $CFG->wwwroot . '/blocks/chat_webgd/index.php" class="criar-grupo-chat"> + </a><ul class="list">';
 
         foreach ($listaGrupos as $grupo) {
             $retorno .= '<li class="listentry">';
@@ -181,7 +181,7 @@ switch ($acao) {
           if ($verificar) {
 
               foreach ($verificar as $value) {
-                  $mensagem .= '<li><span>' . $value->firstname . ' disse:</span><p>' . $value->mensagem . '</p></li>';
+                  $mensagem .= '<li><span>' . $value->firstname . ' '.get_string('disse','block_chat_webgd').':</span><p>' . $value->mensagem . '</p></li>';
 
               }
 
