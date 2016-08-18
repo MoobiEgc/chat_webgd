@@ -175,6 +175,7 @@ $(document).ready(function () {
 
     function verificarGrupo() {
         //beforeSend: antes = depois;
+        //console.log(janelas);
         $.post(CFG_CHAT + 'chatGrupo.php', {ids: janelas, acao: 'verificar'}, function (x) {
             //console.log(x);
             if (x.nao_lidos != '') {
