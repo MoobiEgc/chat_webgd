@@ -1,5 +1,5 @@
-var CFG_CHAT = window.location.origin + '/moodle/blocks/chat_webgd/';
-var CFG_BASE = window.location.origin + '/moodle/';
+var CFG_CHAT = window.location.origin + '/blocks/chat_webgd/';
+var CFG_BASE = window.location.origin + '/';
 
 var title = document.title;
 var blinking = false;
@@ -175,6 +175,7 @@ $(document).ready(function () {
 
     function verificarGrupo() {
         //beforeSend: antes = depois;
+        //console.log(janelas);
         $.post(CFG_CHAT + 'chatGrupo.php', {ids: janelas, acao: 'verificar'}, function (x) {
             //console.log(x);
             if (x.nao_lidos != '') {
