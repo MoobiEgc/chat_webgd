@@ -1,5 +1,5 @@
-var CFG_CHAT = window.location.origin + '/moodle/blocks/chat_webgd/';
-var CFG_BASE = window.location.origin + '/moodle/';
+var CFG_CHAT = window.location.origin + '/blocks/chat_webgd/';
+var CFG_BASE = window.location.origin + '/';
 
 var title = document.title;
 var blinking = false;
