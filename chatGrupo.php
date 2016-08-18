@@ -38,6 +38,7 @@ switch ($acao) {
 
         $grupoChatDao = new ChatWebgdDao();
         $gruposNovos = $grupoChatDao->buscaMensagensNaoLidas($USER->id);
+
         foreach ($gruposNovos as $groupbygroup) {
             array_push($ids, $groupbygroup->chatwebgd_grupo_id);
             $nomeGrupo[$groupbygroup->chatwebgd_grupo_id] = $groupbygroup->nome_grupo;
@@ -76,4 +77,3 @@ switch ($acao) {
         break;
 }
 ?>
-

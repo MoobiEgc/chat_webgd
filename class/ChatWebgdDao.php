@@ -30,7 +30,7 @@ class ChatWebgdDao {
             $where .= "  u.id NOT IN(
                         SELECT gu.user_id
                           FROM {chatwebgd_grupo_usuario} gu
-                         WHERE gu.chatwebgd_grupo_id = :idgrupo 
+                         WHERE gu.chatwebgd_grupo_id = :idgrupo
                                                        AND gu.ativo = 1
                     )";
             $params['idgrupo'] = $idGrupo;
@@ -45,10 +45,10 @@ class ChatWebgdDao {
 
         $params = array('iduser' => $idUser);
 
-        $sql = "SELECT cwg.* 
+        $sql = "SELECT cwg.*
                   FROM {chatwebgd_grupo} cwg
                   JOIN {chatwebgd_grupo_usuario} cwgu ON cwg.id = cwgu.chatwebgd_grupo_id
-                 WHERE cwgu.user_id = :iduser 
+                 WHERE cwgu.user_id = :iduser
                        AND cwgu.ativo = 1";
 
         if (!is_null($idChat)) {
@@ -65,7 +65,7 @@ class ChatWebgdDao {
     public function findGroupById($idGrupo) {
         $params = array('idrupo' => $idGrupo);
 
-        $sql = "SELECT cwg.* 
+        $sql = "SELECT cwg.*
                   FROM {chatwebgd_grupo} cwg
                  WHERE cwg.id = :idrupo";
 
@@ -75,7 +75,7 @@ class ChatWebgdDao {
     private function inserirMensagemUsuarios($idMensagemGrupo, $mensagemGrupo) {
         $sql = "SELECT cgu.id
                   FROM {chatwebgd_grupo_usuario} cgu
-                 WHERE cgu.chatwebgd_grupo_id = :idgrupo 
+                 WHERE cgu.chatwebgd_grupo_id = :idgrupo
                        AND cgu.ativo = 1";
 
         $params = array('idgrupo' => $mensagemGrupo->chatwebgd_grupo_id);
@@ -115,13 +115,13 @@ class ChatWebgdDao {
     }
 
     public function buscaMensagens($idGrupo, $idUsuario) {
-        $sql = "  SELECT mg.id,u.id as user_id,mg.mensagem,mg.data_registro, ".$DB->sql_concat('u.firstname',' ','u.lastname')." AS nome_usuario
+        $sql = "  SELECT mg.id,u.id as user_id,mg.mensagem,mg.data_registro, u.firstname AS nome_usuario
                     FROM {chatwebgd_mensagem_usuario} mu
                     JOIN {chatwebgd_mensagem_grupo} mg ON mu.chatwebgd_mensagem_grupo_id = mg.id
                     JOIN {chatwebgd_grupo_usuario} gu ON gu.id = mu.chatwebgd_grupo_usuario_id
-                    JOIN {user} u ON mg.user_id = u.id                                
-                   WHERE mg.chatwebgd_grupo_id = :idgrupo 
-                         AND gu.user_id = :iduser 
+                    JOIN {user} u ON mg.user_id = u.id
+                   WHERE mg.chatwebgd_grupo_id = :idgrupo
+                         AND gu.user_id = :iduser
                 ORDER BY mg.id DESC";
 
         $params = array('idgrupo' => $idGrupo, 'iduser' => $idUsuario);
@@ -131,16 +131,15 @@ class ChatWebgdDao {
 
     public function buscaMensagensNaoLidas($idUsuario) {
         $sql = "SELECT mg.chatwebgd_grupo_id,webgrup.nome as nome_grupo,u.id as user_id,
-                         mg.mensagem,mg.data_registro, ".$DB->sql_concat('u.firstname',' ','u.lastname')." AS nome_usuario
+                         mg.mensagem,mg.data_registro, u.firstname AS nome_usuario
                   FROM {chatwebgd_mensagem_usuario} mu
                   JOIN {chatwebgd_mensagem_grupo} mg ON mu.chatwebgd_mensagem_grupo_id = mg.id
                   JOIN {chatwebgd_grupo_usuario} gu ON gu.id = mu.chatwebgd_grupo_usuario_id
                   JOIN {user} u ON mg.user_id = u.id
                   JOIN {chatwebgd_grupo} webgrup ON mg.chatwebgd_grupo_id = webgrup.id
-                 WHERE gu.user_id = :iduser 
-              GROUP BY mg.chatwebgd_grupo_id 
+                 WHERE gu.user_id = :iduser
+              GROUP BY mg.chatwebgd_grupo_id
               ORDER BY mg.id desc";
-
         $params = array('iduser' => $idUsuario);
         $mensagens = $this->DB->get_records_sql($sql, $params, 0, 25);
         return $mensagens;
@@ -149,7 +148,7 @@ class ChatWebgdDao {
     public function marcarMensagensLidas($idGrupo, $idUsuario) {
         $sql = "SELECT gu.id
           FROM {chatwebgd_grupo_usuario} gu
-         WHERE gu.user_id = :iduser 
+         WHERE gu.user_id = :iduser
                        AND gu.chatwebgd_grupo_id = :idgrupo";
 
         $params = array('iduser' => $idUsuario, 'idgrupo' => $idGrupo);
@@ -164,8 +163,8 @@ class ChatWebgdDao {
         $sql = "  SELECT COUNT(mu.id) AS total
                     FROM {chatwebgd_mensagem_usuario} mu
                     JOIN {chatwebgd_grupo_usuario} gu ON gu.id = mu.chatwebgd_grupo_usuario_id
-                   WHERE gu.user_id = :iduser 
-                         AND gu.chatwebgd_grupo_id = :idgrupo 
+                   WHERE gu.user_id = :iduser
+                         AND gu.chatwebgd_grupo_id = :idgrupo
                          AND mu.lido = 0";
 
         $params = array('iduser' => $idUsuario, 'idgrupo' => $idGrupo);
@@ -175,9 +174,9 @@ class ChatWebgdDao {
     }
 
     public function verificaUsuarioInativo($idGrupo, $idUsuario) {
-        $sql = "SELECT cgu.id 
+        $sql = "SELECT cgu.id
                   FROM {chatwebgd_grupo_usuario} cgu
-                 WHERE cgu.user_id = :iduser 
+                 WHERE cgu.user_id = :iduser
                        AND cgu.chatwebgd_grupo_id = :idgrupo";
 
         $params = array('iduser' => $idUsuario, 'idgrupo' => $idGrupo);
