@@ -20,7 +20,7 @@
  *
  * @package    block
  * @subpackage chat_webgd
- * @copyright  2016 onwards WebGD group from UFSC http://www.webgd.ufsc.br/
+ * @copyright  2016 onwards Moobi group from UFSC http://www.webgd.ufsc.br/
  * @license    http://www.gnu.org/licenses/lgpl-3.0.html GNU LGPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
