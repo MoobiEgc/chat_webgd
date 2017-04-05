@@ -141,7 +141,7 @@ function createMeeting($meetingId, $meetingName) {
         'meetingName' => $meetingName, // REQUIRED
         'attendeePw' => 'ap', // Match this value in getJoinMeetingURL() to join as attendee.
         'moderatorPw' => 'mp', // Match this value in getJoinMeetingURL() to join as moderator.
-        'welcomeMsg' => 'Seja bem vindo(a) a sala de conferência do Moodle Acessível do grupo WebGD!', // ''= use default. Change to customize.
+        'welcomeMsg' => 'Seja bem vindo(a) a sala de conferência do Moodle Acessível do grupo Moobi!', // ''= use default. Change to customize.
         'dialNumber' => '', // The main number to call into. Optional.
         'voiceBridge' => '', // 5 digit PIN to join voice conference.
         'webVoice' => '', // Alphanumeric to join voice. Optional.
